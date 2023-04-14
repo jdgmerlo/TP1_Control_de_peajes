@@ -1,5 +1,6 @@
 #Trabajo Práctico N° 1 - Control de Peajes
 
+#Impuestos
 IMP_ARGENTINA = 300
 IMP_BRASIL = 400
 IMP_BOLIVIA = 200
