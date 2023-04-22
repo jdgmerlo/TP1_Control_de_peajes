@@ -7,21 +7,26 @@ IMP_BOLIVIA = 200
 IMP_PARAGUAY = 300
 IMP_URUGUAY = 300
 
+abecedario = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+numeros = "0123456789"
+
 patente = input('Ingrese patente del vehículo: ')
 
 if(len(patente) == 7):
-    if(patente[0:1].isalpha() and patente[2:4].isnumeric() and patente[5:6].isalpha()):
-        nacionalidad = 'Argentina'
-    elif(patente[0:2].isalpha() and patente[3].isnumeric() and patente[4].isalpha() and patente[5:6].isnumeric()):
-        nacionalidad = 'Brasil'
-    elif(patente[0:1].isalpha() and patente[2:6].isnumeric()):
-        nacionalidad = 'Bolivia'
-    elif(patente[0:3].isalpha() and patente[4:6].isnumeric()):
-        nacionalidad = 'Paraguay'
-    elif(patente[0:2].isalpha() and patente[3:6].isnumeric()):
-        nacionalidad = 'Uruguay'
+  if patente[0] and patente[1] in abecedario and patente[2] in numeros:
+    if patente[-1] in abecedario:
+        nacionalidad = "Argentina"
     else:
-        nacionalidad = 'Otro'
+        nacionalidad = "Bolivia"
+  elif patente[2] in abecedario and patente[3] in numeros:
+    if patente[4] in abecedario:
+        nacionalidad = "Brasil"
+    else:
+        nacionalidad = "Uruguay"
+  elif patente[3] in abecedario:
+    nacionalidad = "Paraguay"
+  else:
+    nacionalidad = "otro"
 else:
     nacionalidad = 'Otro'
 
