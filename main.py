@@ -56,13 +56,8 @@ print('-' * 20)
 
 distancia = float(input('Ingrese distancia(Km): '))
 
-#Impresión del ticket.
 
-print('*' * 20)
-print('***TICKET***')
-print('*' * 20)
-print('País de procedencia del vehículo: ', nacionalidad)
-
+#Calculo del importe
 if(pais == 0):
     if(tipo_vehiculo == 0):
         importe_basico = (50 * IMP_ARGENTINA) / 100
@@ -99,15 +94,18 @@ elif (pais == 4):
     elif (tipo_vehiculo == 2):
         importe_basico = IMP_URUGUAY + ((60 * IMP_URUGUAY) / 100)
 
-print('Importe básico a pagar: $', importe_basico)
-
 if(forma_pago == 2):
     importe_final = importe_basico - ((10 * importe_basico) / 100)
 elif(forma_pago == 1):
     importe_final = importe_basico
 
+valor_kilometro = round((importe_final / distancia),2)
+
+#Impresión del ticket.
+print('*' * 20)
+print('***TICKET***')
+print('*' * 20)
+print('País de procedencia del vehículo: ', nacionalidad)
+print('Importe básico a pagar: $', importe_basico)
 print('Importe final a pagar: $', importe_final)
-
-valor_kilometro = importe_final / distancia
-
 print('Valor promedio pagado por kilómetro: $', valor_kilometro)
