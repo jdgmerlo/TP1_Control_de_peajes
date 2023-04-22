@@ -7,21 +7,26 @@ IMP_BOLIVIA = 200
 IMP_PARAGUAY = 300
 IMP_URUGUAY = 300
 
+abecedario = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+numeros = "0123456789"
+
 patente = input('Ingrese patente del vehículo: ')
 
 if(len(patente) == 7):
-    if(patente[0:1].isalpha() and patente[2:4].isnumeric() and patente[5:6].isalpha()):
-        nacionalidad = 'Argentina'
-    elif(patente[0:2].isalpha() and patente[3].isnumeric() and patente[4].isalpha() and patente[5:6].isnumeric()):
-        nacionalidad = 'Brasil'
-    elif(patente[0:1].isalpha() and patente[2:6].isnumeric()):
-        nacionalidad = 'Bolivia'
-    elif(patente[0:3].isalpha() and patente[4:6].isnumeric()):
-        nacionalidad = 'Paraguay'
-    elif(patente[0:2].isalpha() and patente[3:6].isnumeric()):
-        nacionalidad = 'Uruguay'
+  if patente[0] and patente[1] in abecedario and patente[2] in numeros:
+    if patente[-1] in abecedario:
+        nacionalidad = "Argentina"
     else:
-        nacionalidad = 'Otro'
+        nacionalidad = "Bolivia"
+  elif patente[2] in abecedario and patente[3] in numeros:
+    if patente[4] in abecedario:
+        nacionalidad = "Brasil"
+    else:
+        nacionalidad = "Uruguay"
+  elif patente[3] in abecedario:
+    nacionalidad = "Paraguay"
+  else:
+    nacionalidad = "otro"
 else:
     nacionalidad = 'Otro'
 
@@ -51,13 +56,8 @@ print('-' * 20)
 
 distancia = float(input('Ingrese distancia(Km): '))
 
-#Impresión del ticket.
 
-print('*' * 20)
-print('***TICKET***')
-print('*' * 20)
-print('País de procedencia del vehículo: ', nacionalidad)
-
+#Calculo del importe
 if(pais == 0):
     if(tipo_vehiculo == 0):
         importe_basico = (50 * IMP_ARGENTINA) / 100
@@ -94,15 +94,18 @@ elif (pais == 4):
     elif (tipo_vehiculo == 2):
         importe_basico = IMP_URUGUAY + ((60 * IMP_URUGUAY) / 100)
 
-print('Importe básico a pagar: $', importe_basico)
-
 if(forma_pago == 2):
     importe_final = importe_basico - ((10 * importe_basico) / 100)
 elif(forma_pago == 1):
     importe_final = importe_basico
 
+valor_kilometro = round((importe_final / distancia),2)
+
+#Impresión del ticket.
+print('*' * 20)
+print('***TICKET***')
+print('*' * 20)
+print('País de procedencia del vehículo: ', nacionalidad)
+print('Importe básico a pagar: $', importe_basico)
 print('Importe final a pagar: $', importe_final)
-
-valor_kilometro = importe_final / distancia
-
 print('Valor promedio pagado por kilómetro: $', valor_kilometro)
